@@ -50,7 +50,7 @@ Steps to Set Up the Project:
 
 Clone the repository:
 
-git clone https://github.com/your-username/employee-management-system.git
+git clone https://github.com/MuttumVenkataYamini99/Employee-Management-System.git
 
 Open the project in IntelliJ IDEA.
 
