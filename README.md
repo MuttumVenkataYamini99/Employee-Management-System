@@ -81,6 +81,6 @@ This project is licensed under the MIT License.
 
 M V Yamini - Java Developer 💻🚀
 
-🤝 Helpers
+🤝 Contributions & Support
 
-M V Sravan, D V Rohit - Contributions & Support
+M V Sravan, D V Rohit - Java Developer 💻🚀
