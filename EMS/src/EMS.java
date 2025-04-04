@@ -14,7 +14,8 @@ public class EMS {
             choice = sc.nextInt();
             switch (choice) {
                 case 1:
-                    Admin admin = new Admin();
+                   Admin admin = new Admin();
+                   admin.adminPanel();
                     
                     break;
                 case 2:
