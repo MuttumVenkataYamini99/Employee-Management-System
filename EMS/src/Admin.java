@@ -3,9 +3,14 @@ import java.util.Scanner;
 public class Admin {
 
     public void adminPanel() {
+        String empID;
+        String empName;
+        String empPassword;
+        String empEmail;
+        int empPhno;
         System.out.println("Welcome to the Admin Panel");
         System.out.println("Please Enter your Admin Username: ");
-
+        DatabaseManager db = new DatabaseManager();
         Scanner sc = new Scanner(System.in);
         String AdminUsername = sc.nextLine();
         System.out.println("Please Enter your Admin Password: ");
@@ -25,6 +30,18 @@ public class Admin {
                     case 1:
                         System.out.println("Adding Employee...");
                         // Call method to add employee
+                        System.out.println("Enter Employee ID: ");
+                        empID = sc.next();
+                        System.out.println("Enter Employee Name: ");
+                        empName = sc.next();
+                        System.out.println("Enter Employee Password: ");
+                        empPassword = sc.next();
+                        System.out.println("Enter Employee Email: ");
+                        empEmail = sc.next();
+                        System.out.println("Enter Employee Phone Number: ");
+                        empPhno = sc.nextInt();
+                        // Call the addEmployee method from DatabaseManager
+                        db.addEmployee(empID, empName, empPassword, empEmail, empPhno);
                         break;
                     case 2:
                         System.out.println("Updating Employee...");
@@ -32,11 +49,13 @@ public class Admin {
                         break;
                     case 3:
                         System.out.println("Deleting Employee...");
-                        // Call method to delete employee
+                        System.out.println("Enter Employee ID: ");
+                        empID = sc.next();
+                        db.deleteEmployee(empID);
                         break;
                     case 4:
                         System.out.println("Getting Employee...");
-                        // Call method to get employee
+                        db.getAllEmployees();
                         break;
                     case 5:
                         System.out.println("Exiting the Admin Panel...");
@@ -50,10 +69,6 @@ public class Admin {
         }
 
     } // end of adminPanel method
-    void addEmployee(){
-
-
-    }
 
 
 }

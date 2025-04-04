@@ -7,17 +7,21 @@ import java.sql.SQLException;
 public class DatabaseManager {
     private static final String URL = "jdbc:mysql://localhost:3306/EMS";
     private static final String USER = "root";
-    private static final String PASSWORD = "WJ28@krhps";
+    private static final String PASSWORD = "Y@mini81189";
 
     private Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public void addEmployee(String empID, String password) {
-        String sql = "INSERT INTO employees (empID, password) VALUES (?, ?)";
+        public void addEmployee(String empID, String empName, String empPassword, String empEmail, int empPhno) {
+        String sql = "INSERT INTO employees (empID,empName, empPassword,empEmail,empPhno) VALUES (?, ?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             pstmt.setString(1, empID);
-            pstmt.setString(2, password);
+            pstmt.setString(2, empName);
+            pstmt.setString(3, empPassword);
+            pstmt.setString(4, empEmail);
+            pstmt.setInt(5, empPhno);
             pstmt.executeUpdate();
             System.out.println("Employee added successfully.");
         } catch (SQLException e) {
@@ -55,19 +59,28 @@ public class DatabaseManager {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 System.out.println("Employee ID: " + rs.getString("empID"));
-                System.out.println("Password: " + rs.getString("password"));
+                System.out.println("Employee Name : " + rs.getString("empName"));
+                System.out.println("Email: " + rs.getString("empEmail"));
+                System.out.println("Phone Number: " + rs.getInt("empPhno"));
+                System.out.println("    ");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        DatabaseManager dbManager = new DatabaseManager();
-        dbManager.addEmployee("E1234567", "password123");
-        dbManager.updateEmployee("E1234567", "newpassword123");
-        dbManager.getEmployee("E1234567");
-        dbManager.deleteEmployee("E1234567");
-    }
+  public void getAllEmployees() {    //getting infinity loop need to review
+      String sql = "SELECT * FROM employees";
+      try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+          ResultSet rs = pstmt.executeQuery();
+          while (rs.next()) {
+              System.out.println("Employee ID: " + rs.getString("empID"));
+              System.out.println(" Employee Name : " + rs.getString("empName"));
+              System.out.println("Email: " + rs.getString("empEmail"));
+              System.out.println("Phone Number: " + rs.getInt("empPhno"));
+          }
+      } catch (SQLException e) {
+          System.out.println(e.getMessage());
+      }
+  }
 }
 
