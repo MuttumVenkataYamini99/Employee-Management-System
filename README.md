@@ -75,7 +75,7 @@ This project is licensed under the MIT License. ✅
 **🤝 Contributions & Support:**
 
 💻 M. V. Sravan - Java & SQL Developer 🛢️
-💻 D. V. Rohit - Java & SQL Developer 🛢️
+
 
 🔗 GitHub Repository: Employee Management System
 
