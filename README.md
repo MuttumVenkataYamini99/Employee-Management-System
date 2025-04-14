@@ -1,10 +1,10 @@
-**🚀 Employee Management System**
+**🚀 Employee Management System :--**
 
-**📌 Project Description**
+**📌 Project Description:**
 
 The Employee Management System is a Java-based application designed to streamline employee record management efficiently. This system allows employees to register, update details, and reset passwords, while administrators have full control over employee records. With a user-friendly interface and robust database integration, it ensures seamless operation for both employees and admins.
 
-🛠️ Technologies Used
+**🛠️ Technologies Used:**
 
 ☕ Java 8+ (Backend Logic)
 
@@ -14,7 +14,7 @@ The Employee Management System is a Java-based application designed to streamlin
 
 🛢️ MySQL Workbench (Database Management)
 
-**✨ Features**
+**✨ Features:**
 
 👤 Employee Features
 
@@ -30,7 +30,7 @@ The Employee Management System is a Java-based application designed to streamlin
 ✅ Delete Employee by ID – Remove employees from the system. ❌
 ✅ Export Employee Details as PDF – Generate reports for documentation. 📄
 
-🚀 Installation Guide
+**🚀 Installation Guide**
 
 **Prerequisites:**
 
@@ -56,13 +56,13 @@ Import the provided schema.sql file.
 
 🚀 Want to contribute? You're welcome to:
 
-Report bugs 🐞
+**Report bugs 🐞:**
 
 Suggest new features ✨
 
 Improve the documentation 📚
 
-👥 Team & Contributors
+**👥 Team & Contributors**
 
 **✨ Author:**
 
