@@ -29,7 +29,7 @@ public class Admin {
                 switch(choice) {
                     case 1:
                         System.out.println("Adding Employee...");
-                        // Call method to add employee
+
                         System.out.println("Enter Employee ID: ");
                         empID = sc.next();
                         System.out.println("Enter Employee Name: ");
@@ -40,6 +40,7 @@ public class Admin {
                         empEmail = sc.next();
                         System.out.println("Enter Employee Phone Number: ");
                         empPhno = sc.nextInt();
+
                         // Call the addEmployee method from DatabaseManager
                         db.addEmployee(empID, empName, empPassword, empEmail, empPhno);
                         break;

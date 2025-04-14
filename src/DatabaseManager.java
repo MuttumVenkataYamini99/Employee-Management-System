@@ -13,15 +13,15 @@ public class DatabaseManager {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-        public void addEmployee(String empID, String empName, String empPassword, String empEmail, int empPhno) {
-        String sql = "INSERT INTO employees (empID,empName, empPassword,empEmail,empPhno) VALUES (?, ?,?,?,?)";
+        public void addEmployee(String empID, String Name, String Password, String Email, int Phno) {
+        String sql = "INSERT INTO employees (empID,Name, Password,Email,Phno) VALUES (?, ?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, empID);
-            pstmt.setString(2, empName);
-            pstmt.setString(3, empPassword);
-            pstmt.setString(4, empEmail);
-            pstmt.setInt(5, empPhno);
+            pstmt.setString(2, Name);
+            pstmt.setString(3, Password);
+            pstmt.setString(4, Email);
+            pstmt.setInt(5, Phno);
             pstmt.executeUpdate();
             System.out.println("Employee added successfully.");
         } catch (SQLException e) {
@@ -52,35 +52,33 @@ public class DatabaseManager {
         }
     }
 
-    public void getEmployee(String empID) {
+
+    public void getAllEmployees() {
+        String sql = "SELECT * FROM employees";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) { // Properly iterates through the ResultSet
+                System.out.println("Employee ID: " + rs.getString("empID"));
+                System.out.println("Employee Name: " + rs.getString("Name"));
+                System.out.println("Email: " + rs.getString("Email"));
+                System.out.println("Phone Number: " + rs.getInt("Phno"));
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while retrieving all employees: " + e.getMessage());
+        }
+    }
+
+    public boolean checkEmployee(String empID) {
         String sql = "SELECT * FROM employees WHERE empID = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, empID);
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                System.out.println("Employee ID: " + rs.getString("empID"));
-                System.out.println("Employee Name : " + rs.getString("empName"));
-                System.out.println("Email: " + rs.getString("empEmail"));
-                System.out.println("Phone Number: " + rs.getInt("empPhno"));
-                System.out.println("    ");
-            }
+            return rs.next(); // Returns true if the employee exists
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
-  public void getAllEmployees() {    //getting infinity loop need to review
-      String sql = "SELECT * FROM employees";
-      try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-          ResultSet rs = pstmt.executeQuery();
-          while (rs.next()) {
-              System.out.println("Employee ID: " + rs.getString("empID"));
-              System.out.println(" Employee Name : " + rs.getString("empName"));
-              System.out.println("Email: " + rs.getString("empEmail"));
-              System.out.println("Phone Number: " + rs.getInt("empPhno"));
-          }
-      } catch (SQLException e) {
-          System.out.println(e.getMessage());
-      }
-  }
 }
 
