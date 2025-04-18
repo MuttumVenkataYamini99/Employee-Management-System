@@ -8,6 +8,7 @@ public class Admin {
         String empPassword = "";
         String empEmail;
         int empPhno;
+        int c=0;
         System.out.println("Welcome to the Admin Panel");
         System.out.println("Please Enter your Admin Username: ");
         DatabaseManager db = new DatabaseManager();
@@ -56,8 +57,11 @@ public class Admin {
                         db.deleteEmployee(empID);
                         break;
                     case 4:
-                        System.out.println("Getting Employee...");
-                        db.getAllEmployees();
+                        if(c==0) {
+                            c += 1;
+                            System.out.println("Getting Employee...");
+                            db.getAllEmployees();
+                        }
                         break;
                     case 5:
                         System.out.println("Exiting the Admin Panel...");

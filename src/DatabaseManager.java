@@ -55,15 +55,18 @@ public class DatabaseManager {
 
     public void getAllEmployees() {
         String sql = "SELECT * FROM employees";
+
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) { // Properly iterates through the ResultSet
-                System.out.println("Employee ID: " + rs.getString("empID"));
-                System.out.println("Employee Name: " + rs.getString("Name"));
-                System.out.println("Email: " + rs.getString("Email"));
-                System.out.println("Phone Number: " + rs.getInt("Phno"));
-                System.out.println();
+            while (rs.next() ) { // Properly iterates through the ResultSet
+                   System.out.println("Employee ID: " + rs.getString("empID"));
+                   System.out.println("Employee Name: " + rs.getString("Name"));
+                   System.out.println("Email: " + rs.getString("Email"));
+                   System.out.println("Phone Number: " + rs.getInt("Phno"));
+                   System.out.println();
+
             }
+
         } catch (SQLException e) {
             System.out.println("Error while retrieving all employees: " + e.getMessage());
         }
