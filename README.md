@@ -70,7 +70,7 @@ Improve the documentation 📚
 
 **🤝 Contributions & Support:**
 
-💻 M. V. Sravan - Java & SQL Developer 🛢️
+💻 M. V. Sravan -(Junior) Java & SQL Developer 🛢️
 
 
 🔗 GitHub Repository: Employee Management System
