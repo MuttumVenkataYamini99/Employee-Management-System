@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 public class DatabaseManager {
     private static final String URL = "jdbc:mysql://localhost:3306/EMS";
     private static final String USER = "root";
@@ -29,17 +30,28 @@ public class DatabaseManager {
         }
     }
 
-    public void updateEmployee(String empID, String newPassword) {
-        String sql = "UPDATE employees SET password = ? WHERE empID = ?";
+    // Inside DatabaseManager.java
+    public void updateEmployee(String empID, String empName, String empPassword, String empEmail, int phno) {
+        String sql = "UPDATE employees SET name = ?, password = ?, email = ?, phno = ? WHERE empID = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, newPassword);
-            pstmt.setString(2, empID);
-            pstmt.executeUpdate();
-            System.out.println("Employee updated successfully.");
+            pstmt.setString(1, empName);
+            pstmt.setString(2, empPassword);
+            pstmt.setString(3, empEmail);
+            pstmt.setInt(4, phno);
+            pstmt.setString(5, empID);
+
+            int rowsAffected = pstmt.executeUpdate();  // Check if update happened
+            if (rowsAffected > 0) {
+                System.out.println("✅ Employee details updated successfully!");
+            } else {
+                System.out.println("❌ No matching Employee ID found. Update failed.");
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("⚠️ Error updating employee details: " + e.getMessage());
         }
     }
+
+
 
     public void deleteEmployee(String empID) {
         String sql = "DELETE FROM employees WHERE empID = ?";
@@ -63,8 +75,6 @@ public class DatabaseManager {
                    System.out.println("Employee Name: " + rs.getString("Name"));
                    System.out.println("Email: " + rs.getString("Email"));
                    System.out.println("Phone Number: " + rs.getInt("Phno"));
-                   System.out.println();
-
             }
 
         } catch (SQLException e) {

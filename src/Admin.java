@@ -7,8 +7,9 @@ public class Admin {
         String empName;
         String empPassword = "";
         String empEmail;
-        int empPhno;
-        int c=0;
+        long empPhno;
+        int gae =0;
+        int upe =0;
         System.out.println("Welcome to the Admin Panel");
         System.out.println("Please Enter your Admin Username: ");
         DatabaseManager db = new DatabaseManager();
@@ -43,23 +44,76 @@ public class Admin {
                         empPhno = sc.nextInt();
 
                         // Call the addEmployee method from DatabaseManager
-                        db.addEmployee(empID, empName, empPassword, empEmail, empPhno);
+                        db.addEmployee(empID, empName, empPassword, empEmail, (int)empPhno);
+
+                        System.out.println("Do want to Exit ? (Yes or No)");
+                        String userChoice1 = sc.next();
+                        if(sc.nextLine().equalsIgnoreCase("Yes")){
+                            System.out.println("Closed");
+                        }
+                        else if(sc.nextLine().equalsIgnoreCase("No")){
+                            System.out.println("Operation cancelled.");
+                        } else {
+                            System.out.println("Invalid choice. Please try again.");
+
+                        }
                         break;
                     case 2:
-                        System.out.println("Updating Employee...");
-                        DatabaseManager db1 = new DatabaseManager();
-                        db1.updateEmployee(empID, empPassword);
+                        if(upe==0) {
+                            upe += 1;
+                            System.out.println("Updating Employee details Please wait for Server connection..."+"⏳");
+                            System.out.println("Enter your old Employee ID: ");
+                            empID = sc.next();
+
+                            System.out.println("Enter Your Old Password: ");
+                            empPassword = sc.next();
+
+                            if( db.checkEmployee(empID)) {
+                             System.out.println("Enter your new Employee ID : ");
+                             empID = sc.next();
+
+                             System.out.println("Enter new Employee Name: ");
+                                empName = sc.next();
+
+                             System.out.println("Enter new Employee Password: ");
+                                empPassword = sc.next();
+
+                                System.out.println("Enter new Employee Email: ");
+                                empEmail = sc.next();
+
+                                System.out.println("Enter new Employee Phone Number: ");
+                                empPhno = sc.nextLong();
+
+                                // Call the updateEmployee method from DatabaseManager
+                                db.updateEmployee(empID, empName, empPassword, empEmail, (int)empPhno);
+                            } else {
+                                System.out.println("Invalid Employee ID or Password. Please try again.");
+                            }
+                            System.out.println("Do want to Exit ? (Yes or No)");
+                            String userChoice2 = sc.next();
+                            if(sc.nextLine().equalsIgnoreCase("Yes")){
+                                System.out.println("Closed");
+                            }
+                            else if(sc.nextLine().equalsIgnoreCase("No")){
+                                System.out.println("Operation cancelled.");
+                            } else {
+                                System.out.println("Invalid choice. Please try again.");
+
+                            }
+                        }
                         break;
                     case 3:
-                        System.out.println("Deleting Employee...");
+                        System.out.println("Employee Details Deleted From Server...");
                         System.out.println("Enter Employee ID: ");
                         empID = sc.next();
                         db.deleteEmployee(empID);
                         break;
                     case 4:
-                        if(c==0) {
-                            c += 1;
-                            System.out.println("Getting Employee...");
+                        if(gae ==0) {
+                            gae += 1;
+                            System.out.println("Getting Employee Details...");
+                            System.out.println("Please wait for Server connection..."+"⏳");
+                            System.out.println();
                             db.getAllEmployees();
                         }
                         break;

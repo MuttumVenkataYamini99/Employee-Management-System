@@ -20,7 +20,7 @@ public class EMS {
                 case 2:
                     Employee employee = new Employee();
                     employee.enterEmpID();
-                    employee.enterpassword();
+                    employee.enterPassword();
                     employee.updatePassword();
                     break;
                 case 3:
