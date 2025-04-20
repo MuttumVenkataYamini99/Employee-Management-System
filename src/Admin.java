@@ -30,33 +30,39 @@ public class Admin {
             do{
                 switch(choice) {
                     case 1:
-                        System.out.println("Adding Employee...");
+                        System.out.println("Adding Employee Details on Database..."+ "⏳");
 
-                        System.out.println("Enter Employee ID: ");
+                        System.out.println("Generate Employee ID: ");
                         empID = sc.next();
                         System.out.println("Enter Employee Name: ");
                         empName = sc.next();
-                        System.out.println("Enter Employee Password: ");
+                        System.out.println("Generate Employee Password: ");
                         empPassword = sc.next();
+                        // Check if the password is less than 8 characters
+                        if (empPassword.length() <=8 && empPassword.matches("[a-zA-Z0-9]+")) {
+                            System.err.println("Password must be less than 8 characters. Try Again.");
+                            System.out.println("Character count: " + empPassword.length());
+                            System.err.println("Special characters and numbers are not allowed.");
+                            break;
+                        }
                         System.out.println("Enter Employee Email: ");
                         empEmail = sc.next();
-                        System.out.println("Enter Employee Phone Number: ");
+                        // Check if the email is valid
+                        if (!empEmail.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
+                            System.err.println("Please enter a valid email address.");
+                            break;
+                        }
+                        System.out.println("Enter Employee Mobile Number: ");
                         empPhno = sc.nextInt();
-
+                        //check the mobile number is valid
+                        if(String.valueOf(empPhno).length() == 10) {
+                            System.out.println("Phone is verified successfully."+ "✅");
+                        } else if (String.valueOf(empPhno).length()<10) {
+                            System.out.println("Mobile number must be 10 digits. Try Again."+ "❌");
+                            break;
+                        }
                         // Call the addEmployee method from DatabaseManager
                         db.addEmployee(empID, empName, empPassword, empEmail, (int)empPhno);
-
-                        System.out.println("Do want to Exit ? (Yes or No)");
-                        String userChoice1 = sc.next();
-                        if(sc.nextLine().equalsIgnoreCase("Yes")){
-                            System.out.println("Closed");
-                        }
-                        else if(sc.nextLine().equalsIgnoreCase("No")){
-                            System.out.println("Operation cancelled.");
-                        } else {
-                            System.out.println("Invalid choice. Please try again.");
-
-                        }
                         break;
                     case 2:
                         if(upe==0) {
@@ -94,11 +100,8 @@ public class Admin {
                             if(sc.nextLine().equalsIgnoreCase("Yes")){
                                 System.out.println("Closed");
                             }
-                            else if(sc.nextLine().equalsIgnoreCase("No")){
+                            else if(sc.nextLine().equalsIgnoreCase("No")) {
                                 System.out.println("Operation cancelled.");
-                            } else {
-                                System.out.println("Invalid choice. Please try again.");
-
                             }
                         }
                         break;
@@ -107,6 +110,7 @@ public class Admin {
                         System.out.println("Enter Employee ID: ");
                         empID = sc.next();
                         db.deleteEmployee(empID);
+
                         break;
                     case 4:
                         if(gae ==0) {

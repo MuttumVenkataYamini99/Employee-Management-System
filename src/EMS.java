@@ -21,7 +21,6 @@ public class EMS {
                     Employee employee = new Employee();
                     employee.enterEmpID();
                     employee.enterPassword();
-                    employee.updatePassword();
                     break;
                 case 3:
                     System.out.println("Exiting the system...");

@@ -71,10 +71,12 @@ public class DatabaseManager {
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next() ) { // Properly iterates through the ResultSet
+                System.out.println("-----------------------------------");
                    System.out.println("Employee ID: " + rs.getString("empID"));
                    System.out.println("Employee Name: " + rs.getString("Name"));
                    System.out.println("Email: " + rs.getString("Email"));
                    System.out.println("Phone Number: " + rs.getInt("Phno"));
+                     System.out.println("Password: " + rs.getString("Password"));
             }
 
         } catch (SQLException e) {
@@ -88,6 +90,18 @@ public class DatabaseManager {
             pstmt.setString(1, empID);
             ResultSet rs = pstmt.executeQuery();
             return rs.next(); // Returns true if the employee exists
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean checkPassword(String password) {
+        String sql = "SELECT * FROM employees WHERE password = ? ";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, password);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next(); // Returns true if the password matches
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
