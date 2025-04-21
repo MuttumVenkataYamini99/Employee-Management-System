@@ -14,7 +14,7 @@ public class DatabaseManager {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-        public void addEmployee(String empID, String Name, String Password, String Email, int Phno) {
+    public void addEmployee(String empID, String Name, String Password, String Email, int Phno) {
         String sql = "INSERT INTO employees (empID,Name, Password,Email,Phno) VALUES (?, ?,?,?,?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -52,7 +52,6 @@ public class DatabaseManager {
     }
 
 
-
     public void deleteEmployee(String empID) {
         String sql = "DELETE FROM employees WHERE empID = ?";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -70,13 +69,13 @@ public class DatabaseManager {
 
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next() ) { // Properly iterates through the ResultSet
+            while (rs.next()) { // Properly iterates through the ResultSet
                 System.out.println("-----------------------------------");
-                   System.out.println("Employee ID: " + rs.getString("empID"));
-                   System.out.println("Employee Name: " + rs.getString("Name"));
-                   System.out.println("Email: " + rs.getString("Email"));
-                   System.out.println("Phone Number: " + rs.getInt("Phno"));
-                     System.out.println("Password: " + rs.getString("Password"));
+                System.out.println("Employee ID: " + rs.getString("empID"));
+                System.out.println("Employee Name: " + rs.getString("Name"));
+                System.out.println("Email: " + rs.getString("Email"));
+                System.out.println("Phone Number: " + rs.getInt("Phno"));
+                System.out.println("Password: " + rs.getString("Password"));
             }
 
         } catch (SQLException e) {
@@ -107,5 +106,31 @@ public class DatabaseManager {
             return false;
         }
     }
+
+    public void employeedetails(String project, String designation, double lap, double salary, double Hike, int _Leaves, double LossOfPay, double Tax_insurance) {
+        String sql = "INSERT INTO employeedetails (project, designation, lap, salary, Hike, _Leaves, LossOfPay, Tax_insurance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, project);
+            pstmt.setString(2, designation);
+            pstmt.setInt(3, (int) lap); // Cast lap to int
+            pstmt.setDouble(4, salary);
+            pstmt.setDouble(5, Hike);
+            pstmt.setInt(6, _Leaves);
+            pstmt.setDouble(7, LossOfPay);
+            pstmt.setDouble(8, Tax_insurance);
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Employee details added successfully.");
+            } else {
+                System.out.println("Failed to add employee details.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while inserting employee details: " + e.getMessage());
+        }
+    }
 }
+
+
+
 

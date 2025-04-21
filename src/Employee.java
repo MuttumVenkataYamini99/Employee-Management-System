@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Employee {
     String EmpID;
+
     String Right = "✅";
     String wrong = "❌";
     Scanner scanner = new Scanner(System.in);
