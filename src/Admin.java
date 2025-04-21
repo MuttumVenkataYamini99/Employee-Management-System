@@ -114,7 +114,7 @@ public class Admin {
 
                         // Call the addEmployee method from DatabaseManager
                         db.addEmployee(empID, empName, empPassword, empEmail, (int)empPhno);
-                        db.employeedetails(project, designation, lpa, salary ,Hike , _Leaves, LossOfPay , Tax_insurance);
+                        db.employeedetails(project, designation, (int) lpa, salary, Hike, _Leaves, LossOfPay, Tax_insurance);
                         break;
                     case 2:
                         if(upe==0) {
@@ -140,7 +140,7 @@ public class Admin {
                                 empEmail = sc.next();
 
                                 System.out.println("Enter new Employee Phone Number: ");
-                                empPhno = sc.nextInt();
+                                empPhno = sc.nextLong();
 
                                 // Call the updateEmployee method from DatabaseManager
                                 db.updateEmployee(empID, empName, empPassword, empEmail, (int)empPhno);
@@ -163,7 +163,7 @@ public class Admin {
                             System.out.println("Getting Employee Details...");
                             System.out.println("Please wait for Server connection..."+"⏳");
                             System.out.println();
-                            db.getAllEmployees();
+                            db.getAllEmployeesDetails();
                         }
                         break;
                     case 5:
@@ -174,7 +174,8 @@ public class Admin {
                 }
             }while (choice != 5);
         } else {
-            System.out.println("Invalid Details, Try Again");
+            System.out.println("ADMIN Login Failed."+"⚠\uFE0F");
+            System.out.println("Password Incorrect. Please try again."+"\uD83D\uDE25");
         }
 
     } // end of adminPanel method

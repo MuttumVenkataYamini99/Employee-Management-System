@@ -64,24 +64,32 @@ public class DatabaseManager {
     }
 
 
-    public void getAllEmployees() {
-        String sql = "SELECT * FROM employees";
+   public void getAllEmployeesDetails() {
+       String sql = "SELECT e.empID, e.Name, e.Email, e.Phno, ed.project, ed.designation, ed.lap, ed.salary, ed.Hike, ed._Leaves, ed.LossOfPay, ed.Tax_insurance " +
+                    "FROM employees e " +
+                    "LEFT JOIN employeedetails ed ON e.empID = e.empID";
 
-        try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) { // Properly iterates through the ResultSet
-                System.out.println("-----------------------------------");
-                System.out.println("Employee ID: " + rs.getString("empID"));
-                System.out.println("Employee Name: " + rs.getString("Name"));
-                System.out.println("Email: " + rs.getString("Email"));
-                System.out.println("Phone Number: " + rs.getInt("Phno"));
-                System.out.println("Password: " + rs.getString("Password"));
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error while retrieving all employees: " + e.getMessage());
-        }
-    }
+       try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+           ResultSet rs = pstmt.executeQuery();
+           while (rs.next()) {
+               System.out.println("-----------------------------------");
+               System.out.println("Employee ID: " + rs.getString("empID"));
+               System.out.println("Employee Name: " + rs.getString("Name"));
+               System.out.println("Email: " + rs.getString("Email"));
+               System.out.println("Phone Number: " + rs.getInt("Phno"));
+               System.out.println("Project: " + rs.getString("project"));
+               System.out.println("Designation: " + rs.getString("designation"));
+               System.out.println("LPA: " + rs.getInt("lap"));
+               System.out.println("Salary: " + rs.getDouble("salary"));
+               System.out.println("Hike: " + rs.getDouble("Hike"));
+               System.out.println("Leaves: " + rs.getInt("_Leaves"));
+               System.out.println("Loss of Pay: " + rs.getDouble("LossOfPay"));
+               System.out.println("Tax and Insurance: " + rs.getDouble("Tax_insurance"));
+           }
+       } catch (SQLException e) {
+           System.out.println("Error while retrieving all employee details: " + e.getMessage());
+       }
+   }
 
     public boolean checkEmployee(String empID) {
         String sql = "SELECT * FROM employees WHERE empID = ?";
@@ -107,12 +115,12 @@ public class DatabaseManager {
         }
     }
 
-    public void employeedetails(String project, String designation, double lap, double salary, double Hike, int _Leaves, double LossOfPay, double Tax_insurance) {
+    public void employeedetails(String project, String designation, int lap, double salary, double Hike, int _Leaves, double LossOfPay, double Tax_insurance) {
         String sql = "INSERT INTO employeedetails (project, designation, lap, salary, Hike, _Leaves, LossOfPay, Tax_insurance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = connect(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, project);
             pstmt.setString(2, designation);
-            pstmt.setInt(3, (int) lap); // Cast lap to int
+            pstmt.setInt(3, lap); // Ensure lap is passed as an integer
             pstmt.setDouble(4, salary);
             pstmt.setDouble(5, Hike);
             pstmt.setInt(6, _Leaves);
@@ -130,6 +138,8 @@ public class DatabaseManager {
         }
     }
 }
+
+
 
 
 

@@ -29,10 +29,10 @@ public class Employee {
         //checking password from database//
         DatabaseManager db = new DatabaseManager();
         if (db.checkPassword(password)) {
-            if (password.length() < 9 && password.matches("[a-zA-Z0-9]+")) {
+            if (password.length() >=10 || password.matches("[a-zA-Z0-9]+")) {
                 System.out.println("Login Successful " + Right);
             } else {
-                System.out.println(wrong + " password  must be below 8 characters. Try Again.");
+                System.out.println(wrong + " password  must be below 10 characters. Try Again.");
             }
         } else {
             System.out.println(wrong + " Your password is incorrect. Please contact HR or Admin.");
@@ -40,3 +40,4 @@ public class Employee {
 
     }
 }
+
